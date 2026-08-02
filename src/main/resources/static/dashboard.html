@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Painel | GymWeb</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/dashboard.html">GYM<span>WEB</span></a>
+            <nav aria-label="Navegação principal">
+                <a href="/dashboard.html">Painel</a>
+                <a href="/cadastro_aluno.html">Alunos</a>
+                <a href="/catalogo.html">Exercícios</a>
+                <a href="/montar_treino.html">Treinos</a>
+                <a data-apenas-dono href="/cadastro_instrutor.html">Instrutores</a>
+                <button class="btn-link" data-logout>Sair</button>
+            </nav>
+        </header>
+
+        <main class="page">
+            <section class="page-header">
+                <div>
+                    <h1>Painel de gestão</h1>
+                    <p data-usuario-nome>Carregando usuário...</p>
+                </div>
+                <a class="btn btn-primary" href="/montar_treino.html">Montar treino</a>
+            </section>
+
+            <div id="mensagem" class="notice hidden" role="alert"></div>
+
+            <section class="grid grid-4" aria-label="Métricas do sistema">
+                <article class="metric"><small>Alunos</small><strong id="total-alunos">—</strong></article>
+                <article class="metric"><small>Instrutores</small><strong id="total-instrutores">—</strong></article>
+                <article class="metric"><small>Treinos</small><strong id="total-treinos">—</strong></article>
+                <article class="metric"><small>Meu cargo</small><strong id="cargo-usuario">—</strong></article>
+            </section>
+
+            <section class="card" style="margin-top: 1.2rem;">
+                <div class="card-body">
+                    <h2 style="margin-top: 0; font-size: 1.05rem; font-weight: 700;">Treinos recentes</h2>
+                    <div id="lista-treinos" class="table-wrapper"><p class="status">Carregando...</p></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

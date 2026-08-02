@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alunos | GymWeb</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/dashboard.html">GYM<span>WEB</span></a>
+            <nav aria-label="Navegação principal">
+                <a href="/dashboard.html">Painel</a>
+                <a href="/cadastro_aluno.html">Alunos</a>
+                <a href="/catalogo.html">Exercícios</a>
+                <a href="/montar_treino.html">Treinos</a>
+                <a data-apenas-dono href="/cadastro_instrutor.html">Instrutores</a>
+                <button class="btn-link" data-logout>Sair</button>
+            </nav>
+        </header>
+
+        <main class="page">
+            <section class="page-header">
+                <div>
+                    <h1>Alunos</h1>
+                    <p data-usuario-nome>Cadastre e organize os alunos da academia.</p>
+                </div>
+            </section>
+
+            <div id="mensagem" class="notice hidden" role="alert"></div>
+
+            <section class="card form-card">
+                <div class="card-body">
+                    <h2 style="margin-top:0; font-size:1.05rem; font-weight:700;">Cadastrar aluno</h2>
+                    <form id="form-aluno" class="form-grid" novalidate>
+                        <div class="form-group"><label for="nome">Nome completo</label><input id="nome" required maxlength="100"></div>
+                        <div class="form-group"><label for="cpf">CPF</label><input id="cpf" inputmode="numeric" required maxlength="14" placeholder="000.000.000-00"></div>
+                        <div class="form-group"><label for="senha">Senha inicial</label><input id="senha" type="password" required minlength="6"></div>
+                        <div class="form-group"><label for="instrutorId">Instrutor responsável</label><select id="instrutorId"><option value="">Sem vínculo inicial</option></select></div>
+                        <div class="form-actions full">
+                            <button class="btn btn-secondary" type="reset">Limpar</button>
+                            <button id="btn-salvar" class="btn btn-primary" type="submit">Salvar aluno</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="card" style="margin-top: 1.2rem;">
+                <div class="card-body">
+                    <h2 style="margin-top:0; font-size:1.05rem; font-weight:700;">Alunos cadastrados</h2>
+                    <div id="lista-alunos" class="table-wrapper"><p class="status">Carregando...</p></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/aluno.js"></script>
+</body>
+</html>

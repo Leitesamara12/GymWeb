@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exercícios | GymWeb</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/dashboard.html">GYM<span>WEB</span></a>
+            <nav aria-label="Navegação principal">
+                <a href="/dashboard.html">Painel</a>
+                <a href="/cadastro_aluno.html">Alunos</a>
+                <a href="/catalogo.html">Exercícios</a>
+                <a href="/montar_treino.html">Treinos</a>
+                <a data-apenas-dono href="/cadastro_instrutor.html">Instrutores</a>
+                <button class="btn-link" data-logout>Sair</button>
+            </nav>
+        </header>
+
+        <main class="page">
+            <section class="page-header">
+                <div>
+                    <h1>Catálogo de exercícios</h1>
+                    <p data-usuario-nome>Biblioteca reutilizável para montagem de treinos.</p>
+                </div>
+                <a class="btn btn-primary" href="/montar_treino.html">Montar treino</a>
+            </section>
+
+            <div id="mensagem" class="notice hidden" role="alert"></div>
+
+            <section class="card form-card">
+                <div class="card-body">
+                    <h2 style="margin-top:0; font-size:1.05rem; font-weight:700;">Novo exercício</h2>
+                    <form id="form-exercicio" class="form-grid" novalidate>
+                        <div class="form-group"><label for="nome">Nome</label><input id="nome" maxlength="100" required></div>
+                        <div class="form-group"><label for="grupoMuscular">Grupo muscular</label><input id="grupoMuscular" maxlength="50" placeholder="Ex.: Peitoral"></div>
+                        <div class="form-group full"><label for="descricao">Descrição</label><textarea id="descricao" maxlength="500" placeholder="Orientações breves do exercício."></textarea></div>
+                        <div class="form-actions full"><button class="btn btn-primary" type="submit">Salvar exercício</button></div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="card" style="margin-top: 1.2rem;">
+                <div class="card-body">
+                    <div class="page-header" style="margin-bottom: 1rem;">
+                        <div><h2 style="margin:0; font-size:1.05rem; font-weight:700;">Exercícios disponíveis</h2></div>
+                        <div class="form-group" style="min-width:220px;"><label class="hidden" for="filtro">Filtrar</label><input id="filtro" placeholder="Filtrar por nome ou grupo"></div>
+                    </div>
+                    <div id="lista-exercicios" class="table-wrapper"><p class="status">Carregando...</p></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/catalogo.js"></script>
+</body>
+</html>
