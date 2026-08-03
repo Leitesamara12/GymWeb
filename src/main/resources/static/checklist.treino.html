@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
     <style>
         * {
             margin: 0;
@@ -316,8 +317,11 @@
 <body>
     <div class="app-shell">
         <header class="topbar">
-            <a class="brand" href="/">GYM<span>WEB</span></a>
+            <a class="brand" href="/dashboard.html">GYM<span>WEB</span></a>
             <nav aria-label="Navegação principal">
+                <a href="/dashboard.html">Painel</a>
+                <a href="/catalogo.html">Exercícios</a>
+                <a href="/montar_treino.html">Treinos</a>
                 <a href="/checklist.treino.html">Meus treinos</a>
                 <button class="btn-link" data-logout>Sair</button>
             </nav>
@@ -365,9 +369,18 @@
         </main>
     </div>
 
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         (function() {
+            const usuario = exigirLogin();
+            if (!usuario) {
+                return;
+            }
+
+            configurarCabecalho();
+
             // ----- DADOS DOS EXERCÍCIOS (checklist) -----
             const exercicios = [
                 { nome: 'Supino reto', series: '3x12', concluido: false },
@@ -511,12 +524,6 @@
                         }
                     }
                 }
-            });
-
-            // ----- SIMULA LOGOUT (só para teste) -----
-            document.querySelector('[data-logout]')?.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Simulação: você saiu do sistema.');
             });
 
         })();
