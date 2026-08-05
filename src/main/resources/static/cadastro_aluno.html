@@ -7,26 +7,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
     <div class="app-shell">
         <header class="topbar">
-            <a class="brand" href="/dashboard.html">GYM<span>WEB</span></a>
+            <a class="brand" href="/dashboard.html"><i class="fa-solid fa-dumbbell"></i> GYM<span>WEB</span></a>
             <nav aria-label="Navegação principal">
-                <a href="/dashboard.html">Painel</a>
-                <a href="/cadastro_aluno.html">Alunos</a>
-                <a href="/catalogo.html">Exercícios</a>
-                <a href="/montar_treino.html">Treinos</a>
-                <a data-apenas-dono href="/cadastro_instrutor.html">Instrutores</a>
-                <button class="btn-link" data-logout>Sair</button>
+                <a href="/dashboard.html"><i class="fa-solid fa-chart-line"></i> Painel</a>
+                <a href="/cadastro_aluno.html"><i class="fa-solid fa-user-plus"></i> Alunos</a>
+                <a href="/catalogo.html"><i class="fa-solid fa-list"></i> Exercícios</a>
+                <a href="/montar_treino.html"><i class="fa-solid fa-dumbbell"></i> Treinos</a>
+                <a data-apenas-dono href="/cadastro_instrutor.html"><i class="fa-solid fa-person-chalkboard"></i> Instrutores</a>
+                <button class="btn-link" data-logout><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
             </nav>
         </header>
 
         <main class="page">
             <section class="page-header">
                 <div>
-                    <h1>Alunos</h1>
+                    <h1><i class="fa-solid fa-users"></i> Alunos</h1>
                     <p data-usuario-nome>Cadastre e organize os alunos da academia.</p>
                 </div>
             </section>
@@ -35,15 +36,18 @@
 
             <section class="card form-card">
                 <div class="card-body">
-                    <h2 style="margin-top:0; font-size:1.05rem; font-weight:700;">Cadastrar aluno</h2>
+                    <h2 style="margin-top:0; font-size:1.05rem; font-weight:700;" id="titulo-formulario">
+                        <i class="fa-solid fa-user-plus" style="color:var(--neon-green);margin-right:6px;"></i>Cadastrar aluno
+                    </h2>
                     <form id="form-aluno" class="form-grid" novalidate>
+                        <input type="hidden" id="aluno-id">
                         <div class="form-group"><label for="nome">Nome completo</label><input id="nome" required maxlength="100"></div>
                         <div class="form-group"><label for="cpf">CPF</label><input id="cpf" inputmode="numeric" required maxlength="14" placeholder="000.000.000-00"></div>
-                        <div class="form-group"><label for="senha">Senha inicial</label><input id="senha" type="password" required minlength="6"></div>
+                        <div class="form-group"><label for="senha">Senha inicial</label><input id="senha" type="password" required minlength="6" placeholder="Mínimo 6 caracteres"></div>
                         <div class="form-group"><label for="instrutorId">Instrutor responsável</label><select id="instrutorId"><option value="">Sem vínculo inicial</option></select></div>
                         <div class="form-actions full">
-                            <button class="btn btn-secondary" type="reset">Limpar</button>
-                            <button id="btn-salvar" class="btn btn-primary" type="submit">Salvar aluno</button>
+                            <button class="btn btn-secondary" type="reset" id="btn-limpar">Limpar</button>
+                            <button id="btn-salvar" class="btn btn-primary" type="submit"><i class="fa-solid fa-check"></i> Salvar aluno</button>
                         </div>
                     </form>
                 </div>
@@ -51,11 +55,31 @@
 
             <section class="card" style="margin-top: 1.2rem;">
                 <div class="card-body">
-                    <h2 style="margin-top:0; font-size:1.05rem; font-weight:700;">Alunos cadastrados</h2>
-                    <div id="lista-alunos" class="table-wrapper"><p class="status">Carregando...</p></div>
+                    <h2 style="margin-top:0; font-size:1.05rem; font-weight:700;">
+                        <i class="fa-solid fa-list" style="color:var(--neon-green);margin-right:6px;"></i>Alunos cadastrados
+                    </h2>
+                    <div id="lista-alunos" class="table-wrapper"><p class="status"><i class="fa-solid fa-spinner fa-spin"></i> Carregando...</p></div>
                 </div>
             </section>
         </main>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div id="modal-excluir" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-triangle-exclamation" style="color:var(--danger);"></i> Confirmar exclusão</h3>
+                <button class="modal-close" id="modal-fechar">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir este aluno? Esta ação não pode ser desfeita.</p>
+                <p id="modal-nome-aluno" style="font-weight:700; color:var(--neon-green); margin-top:0.5rem;"></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="modal-cancelar">Cancelar</button>
+                <button class="btn btn-danger" id="modal-confirmar"><i class="fa-solid fa-trash"></i> Excluir</button>
+            </div>
+        </div>
     </div>
 
     <script src="/js/api.js"></script>

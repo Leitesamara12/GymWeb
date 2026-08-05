@@ -29,7 +29,6 @@
                     <h1>Painel de gestão</h1>
                     <p data-usuario-nome>Carregando usuário...</p>
                 </div>
-                <a class="btn btn-primary" href="/montar_treino.html">Montar treino</a>
             </section>
 
             <div id="mensagem" class="notice hidden" role="alert"></div>
@@ -39,6 +38,14 @@
                 <article class="metric"><small>Instrutores</small><strong id="total-instrutores">—</strong></article>
                 <article class="metric"><small>Treinos</small><strong id="total-treinos">—</strong></article>
                 <article class="metric"><small>Meu cargo</small><strong id="cargo-usuario">—</strong></article>
+            </section>
+
+            <!-- Gráfico Frequência Semanal -->
+            <section class="card" style="margin-top: 1.2rem;">
+                <div class="card-body">
+                    <h2 style="margin-top: 0; font-size: 1.05rem; font-weight: 700;">Frequência semanal</h2>
+                    <canvas id="grafico-frequencia" height="120"></canvas>
+                </div>
             </section>
 
             <section class="card" style="margin-top: 1.2rem;">
@@ -53,5 +60,42 @@
     <script src="/js/api.js"></script>
     <script src="/js/auth.js"></script>
     <script src="/js/dashboard.js"></script>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+    const ctx = document.getElementById('grafico-frequencia').getContext('2d');
+    const graficoFrequencia = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            datasets: [{
+                label: 'Frequência',
+                data: [12, 19, 7, 15, 10, 5, 3], // valores de exemplo
+                backgroundColor: '#c0f135', // amarelo
+                borderColor: '#c0f135',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: '#fff' }
+                },
+                x: {
+                    ticks: { color: '#fff' }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: '#fff' }
+                }
+            }
+        }
+    });
+    </script>
 </body>
 </html>

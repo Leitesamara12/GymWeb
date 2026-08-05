@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/instrutores" )
@@ -17,6 +18,18 @@ public class InstrutorController {
 
     public InstrutorController(InstrutorService instrutorService) {
         this.instrutorService = instrutorService;
+    }
+
+    /**
+     * Usado pelo card "Instrutores" do dashboard. Diferente dos outros
+     * endpoints deste controller (DONO apenas), aqui liberamos também
+     * para INSTRUTOR — é só uma contagem, não dado sensível.
+     */
+    @GetMapping("/contar")
+    public ResponseEntity<Map<String, Object>> contar(HttpSession session) {
+        validarEquipe(session);
+        long total = instrutorService.listar().size();
+        return ResponseEntity.ok(Map.of("totalInstrutores", total));
     }
 
     @PostMapping
@@ -60,6 +73,14 @@ public class InstrutorController {
         String cargo = cargoObj != null ? cargoObj.toString() : "";
         if (!"DONO".equalsIgnoreCase(cargo)) {
             throw new AcessoNegadoException("Apenas o administrador (DONO) pode gerenciar instrutores.");
+        }
+    }
+
+    private void validarEquipe(HttpSession session) {
+        Object cargoObj = session.getAttribute("cargo");
+        String cargo = cargoObj != null ? cargoObj.toString() : "";
+        if (!"DONO".equalsIgnoreCase(cargo) && !"INSTRUTOR".equalsIgnoreCase(cargo)) {
+            throw new AcessoNegadoException("Apenas DONO ou INSTRUTOR podem ver essa informação.");
         }
     }
 
